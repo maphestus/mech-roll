@@ -47,6 +47,7 @@ def hit_location():
         print('Blah')
     return loc
 
+
 def printmech(mech):
     mech_string = f"""      {mech.armor[0]}/{mech.wound[0]}
 {mech.armor[1]}/{mech.wound[1]}   {mech.armor[3]}/{mech.wound[3]}   {mech.armor[2]}/{mech.wound[2]}
@@ -56,10 +57,19 @@ def printmech(mech):
     print(mech_string)
     return
 
+def check_missing_loc(loc):
+    if loc == 'x':
+        return 1
+    else:
+        return 0
+
 
 def battle(mech1, mech2):
     print("Battle Commence!")
-    hit_loc = hit_location()
+    missing = 1
+    while missing == 1:
+        hit_loc = hit_location()
+        missing = check_missing_loc(mech2.wound[hit_loc])
     dmg = dice_roller(4)
     print("Mech hit location:", hit_loc)
     print("Total Successes: ", dmg)
@@ -77,6 +87,11 @@ def battle(mech1, mech2):
             pen = dmg - mech2.armor[hit_loc]
             mech2.wound[hit_loc] = mech2.wound[hit_loc] - pen
             mech2.armor[hit_loc] = mech2.armor[hit_loc] - 1
+            if mech2.armor[hit_loc] <= 0:
+                mech2.armor[hit_loc] = 'x'
+            if mech2.wound[hit_loc] <= 0:
+                mech2.wound[hit_loc] = 'x'
+
             return
 
 
