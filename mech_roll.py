@@ -11,13 +11,28 @@ class Mech:
         self.wound = wound
 
 
+class Pilot:
+    """One pilot instance"""
+    pilotCount = 0
+
+    def __init__(self, name, size, armor, wound, strength, agility, intellect):
+        self.name = name
+        self.size = size
+        self.armor = armor
+        self.wound = wound
+        self.strength = strength
+        self.agility = agility
+        self.intellect = intellect
+
+
 def dice_roller(d):
     tot = 0
     a = dice.roll(str(d) + 'd10')
     for success in a:
-        if success >= 7:
+        if success >= 8:
             tot += 1
     print(a)
+    print("Total Successes: ", tot)
     return tot
 
 
@@ -109,10 +124,15 @@ mech2 = Mech('Falstaff', 'S', armor = [0, 1, 1, 2, 1, 1], wound = [1, 1, 1, 1, 1
 
 #print(dice_roller(2))
 #print(hit_location())
-battle(mech1, mech2)
+#battle(mech1, mech2)
 
-printmech(mech1)
-printmech(mech2)
+dice_roller(6)
+dice_roller(4)
+dice_roller(3)
+
+
+#printmech(mech1)
+#printmech(mech2)
 
 
 
